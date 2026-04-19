@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kamsu_marc — Développeur Web Freelance</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #F7F5F2;
+      --fg: #111110;
+      --accent: #1A1A1A;
+      --muted: #888884;
+      --border: #E2DED8;
+      --white: #FFFFFF;
+      --tag-bg: #EDEAE5;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(247, 245, 242, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--fg);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 0, 0, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      color: var(--fg);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.25s;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #555552;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.4s;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.55s;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--fg);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #333;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--fg);
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--fg);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 4rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.8s;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    /* PROJECTS */
+    #projets {
+      background: var(--bg);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    }
+
+    .project-thumb {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .project-thumb.t1 {
+      background: #F0EDE8;
+      color: #C5BFBA;
+    }
+
+    .project-thumb.t2 {
+      background: #E8EDF0;
+      color: #BAC2C5;
+    }
+
+    .project-thumb.t3 {
+      background: #EEF0E8;
+      color: #C0C5BA;
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-body p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: #666662;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--fg);
+      text-decoration: none;
+      margin-top: 1rem;
+      padding-bottom: 1px;
+      border-bottom: 1px solid var(--fg);
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover {
+      gap: 0.7rem;
+    }
+
+    /* SKILLS */
+    #competences {
+      background: var(--fg);
+      color: var(--white);
+    }
+
+    #competences .section-label {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    #competences .section-label::after {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    #competences .section-title {
+      color: var(--white);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+
+    .skill-item {
+      background: var(--fg);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .skill-item:hover {
+      background: #1f1f1e;
+    }
+
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-item h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-item p {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.5;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--bg);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .contact-info h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 400;
+      transition: gap 0.2s;
+    }
+
+    .contact-link:hover {
+      gap: 1rem;
+    }
+
+    .contact-link span {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--fg);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--fg);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+    }
+
+    .btn-send {
+      background: var(--fg);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-send:hover {
+      transform: translateY(-2px);
+      background: #333;
+    }
+
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      section {
+        padding: 5rem 1.5rem 3rem;
+      }
+
+      .contact-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+
+      .hero-scroll {
+        left: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">Kamsu_marc</a>
+    <ul class="nav-links">
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="accueil">
+    <div class="hero-inner">
+      <div class="hero-tag">Disponible pour missions</div>
+      <h1>Développeur Web<br><em>Freelance</em></h1>
+      <p class="hero-desc">Je crée des sites web et landing pages modernes pour les entreprises et entrepreneurs qui
+        veulent être visibles en ligne.</p>
+      <div class="hero-cta">
+        <a href="#projets" class="btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn-secondary">Me contacter</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Défiler</div>
+  </section>
+
+  <section id="projets">
+    <div class="section-label reveal">Travaux</div>
+    <h2 class="section-title reveal">Projets récents</h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-thumb t1">01</div>
+        <div class="project-body">
+          <h3>Site Vitrine — Restaurant</h3>
+          <p>Site moderne pour un restaurant local avec menu interactif et formulaire de réservation.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+          <!-- REMPLACEZ # par le vrai lien de votre projet -->
+          <a href="HTML Project\Project\1\Index.html" class="project-link" target="_blank">Voir le projet →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb t2">02</div>
+        <div class="project-body">
+          <h3>Landing Page — Startup Tech</h3>
+          <p>Page de lancement avec animations et section pricing pour une startup SaaS.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+          <a href="HTML Project\Project\2\index.html" target="_blank" class="project-link">Voir le projet →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-thumb t3">03</div>
+        <div class="project-body">
+          <h3>Portfolio — Photographe</h3>
+          <p>Portfolio minimaliste avec galerie responsive et lightbox pour un photographe.</p>
+          <div class="project-tags">
+            <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+          </div>
+          <a href="HTML Project\Project\3\index.html" class="project-link" target="_blank">Voir le projet →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="competences">
+    <div class="section-label reveal">Stack technique</div>
+    <h2 class="section-title reveal">Compétences</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-item">
+        <div class="skill-icon">🌐</div>
+        <h4>HTML5</h4>
+        <p>Structure sémantique, accessibilité, SEO on-page</p>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">🎨</div>
+        <h4>CSS3</h4>
+        <p>Flexbox, Grid, animations, design responsive</p>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">⚡</div>
+        <h4>JavaScript</h4>
+        <p>Interactivité, DOM, formulaires dynamiques</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label reveal">Travaillons ensemble</div>
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <h2>Vous avez un projet en tête ?</h2>
+        <p>Je suis disponible pour des missions freelance. Décrivez-moi votre projet et je vous réponds sous 24h.</p>
+        <div class="contact-links">
+          <a href="mailto:kamsummanthony@gmail.com" class="contact-link"><span>✉️</span> Kamsummanthony@gmail.com</a>
+          <a href="https://wa.me/237681284611" class="contact-link" target="_blank"><span>📱</span> WhatsApp : +237
+            681284611</a>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label>Votre nom</label>
+          <input type="text" placeholder="Kamsu Marc">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="Marc@example.com" required>
+        </div>
+        <div class="form-group">
+          <label>Votre projet</label>
+          <textarea placeholder="Décrivez brièvement votre projet..."></textarea>
+        </div>
+        <button class="btn-send">Envoyer le message →</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Kamsu_marc — Développeur Web Freelance</span>
+    <span>Disponible pour missions</span>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
